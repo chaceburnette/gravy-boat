@@ -9,6 +9,19 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div></div>
+    
+    <div class="container">
+      <% flash.each do |name, msg| %>
+        <%- css_class = name == 'alert' ? 'alert alert-danger' : 'alert alert-success' %>
+        <div role='alert' class='<%=css_class %>'>
+          <%= msg %>
+        </div>
+      <% end %>
+      <% if logged_in? %>
+        I'm Logged In!
+      <% end %>
+      <%= yield %>
+  </div>
   </body>
 </html>
