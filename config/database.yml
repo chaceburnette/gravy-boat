@@ -12,5 +12,6 @@ test:
   database: gravy-boat-test
 
 production:
-  url: ENV['DATABASE_URL']
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
 
