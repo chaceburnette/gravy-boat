@@ -9,17 +9,19 @@
   </head>
 
   <body>
-    <div></div>
-    
-    <div class="container">
+    <div class="header-menu">
+      <div class="container">
+        <% if logged_in? %>
+          <a href="/logout" class="logout-link pull-right">Logout</a>
+        <% end %>
+      </div>
+    </div>
+    <div class="container main-container">
       <% flash.each do |name, msg| %>
         <%- css_class = name == 'alert' ? 'alert alert-danger' : 'alert alert-success' %>
         <div role='alert' class='<%=css_class %>'>
           <%= msg %>
         </div>
-      <% end %>
-      <% if logged_in? %>
-        I'm Logged In!
       <% end %>
       <%= yield %>
   </div>
