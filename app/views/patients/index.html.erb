@@ -1,0 +1,33 @@
+<h1>Patients</h1>
+
+<div class="patient-list">
+  <div class="row">
+    <div class="col-xs-8">
+      Name
+    </div>
+  </div>
+  <% @patients.each do |patient| %>
+    <div class="row">
+      <div class="col-xs-8">
+        <%= link_to patient.name, patient, class: 'patient-name' %>
+      </div>
+      <div class="col-xs-4">
+
+        <%= link_to edit_patient_path(patient) do %>
+          <i class="glyphicon glyphicon-edit"></i>
+        <% end %>
+        <%= link_to patient, method: :delete, data: { confirm: "Are you sure you want to delete #{patient.name}?" } do %>
+          <i class="glyphicon glyphicon-trash"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <br />
+
+  <div class="row">
+    <div class="col-xs-12">
+      <%= link_to 'New Patient', new_patient_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
