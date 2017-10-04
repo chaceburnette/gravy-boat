@@ -12,5 +12,5 @@ test:
   database: gravy-boat-test
 
 production:
-  <<: *default
-  database: gravy-boat-prod
+  url: ENV['DATABASE_URL']
+
