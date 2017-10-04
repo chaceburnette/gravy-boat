@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     if logged_in?
-      #redirect to patient list here
+      redirect_to patients_path
     end
   end
 
