@@ -8,11 +8,10 @@
   </div>
   <% @patients.each do |patient| %>
     <div class="row">
-      <div class="col-xs-8">
+      <div class="col-xs-4">
         <%= link_to patient.name, patient, class: 'patient-name' %>
       </div>
       <div class="col-xs-4">
-
         <%= link_to edit_patient_path(patient) do %>
           <i class="glyphicon glyphicon-edit"></i>
         <% end %>

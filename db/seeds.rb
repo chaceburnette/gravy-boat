@@ -7,4 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Role.create(name: "Admin")
-Role.create(name: "Standard")
+Role.create(name: "Uploader")
+Role.create(name: "Image Viewer")
+Role.create(name: "Team Viewer")
