@@ -1,4 +1,4 @@
-<h2>Edit <%= @user.email %></h2>
+<h2>Add User</h2>
 
 <%= form_with(model: @user, local: true) do |form| %>
   <% if @user.errors.any? %>
@@ -19,18 +19,8 @@
   </div>
 
   <div class="field">
-      <%= check_box("user", "admin?") %>
-      <%= Role::ADMIN %>
-      <br />
-      <%= check_box("user", "uploader?") %>
-      <%= Role::UPLOADER %>
-      <br />
-      <%= check_box("user", "image_viewer?") %>
-      <%= Role::IMAGE_VIEWER %>
-      <br />
-      <%= check_box("user", "team_viewer?") %>
-      <%= Role::TEAM_VIEWER %>
-      <br />
+    <%= form.label :password %>
+    <%= form.password_field :password, id: :password %>
   </div>
 
   <div class="actions">
