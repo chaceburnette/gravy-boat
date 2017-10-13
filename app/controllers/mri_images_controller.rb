@@ -1,4 +1,4 @@
-class MriImagesController < ApplicationController
+class MriImagesController < AuthController
 	before_action :set_patient
 	def index
 		@mri_images = @patient.mri_images
