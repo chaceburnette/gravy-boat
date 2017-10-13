@@ -9,6 +9,7 @@
   <% @patients.each do |patient| %>
     <div class="row">
       <div class="col-xs-4">
+        <a class="patient-name" href="/patients/<%=patient.id%>/mri_images"
         <%= link_to patient.name, patient, class: 'patient-name' %>
       </div>
       <div class="col-xs-4">

@@ -19,7 +19,7 @@ class PatientsController < AuthController
     @patient = Patient.new(patient_params)
 
     if @patient.save
-      redirect_to @patient, notice: 'Patient was successfully created.'
+      redirect_to "/patients/#{@patient.id}/mri_images", notice: 'Patient was successfully created.'
     else
       render :new
     end
