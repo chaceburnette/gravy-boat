@@ -11,6 +11,7 @@ class MriImagesController < AuthController
 		mri_image = MriImage.new(file: params[:file].open)
 		mri_image.patient = @patient
 		mri_image.save
+		redirect_to action: :index
 	end
 
 	private
