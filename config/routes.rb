@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
   resources :patients
+
+  get 'patients/:patient_id/mri_images' => 'mri_images#index'
+  get 'patients/:patient_id/mri_images/new' => 'mri_images#new'
+  post 'patients/:patient_id/mri_images/new' => 'mri_images#create'
 end
