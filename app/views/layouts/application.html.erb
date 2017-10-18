@@ -11,11 +11,11 @@
   <body>
     <div class="header-menu">
       <div class="container">
-        <a href="/patients">Patients</a>
-        <% if current_user.admin? %>
-          <a href="/users">Users</a>
-        <% end %>
         <% if logged_in? %>
+          <a href="/patients">Patients</a>
+          <% if current_user.admin? %>
+            <a href="/users">Users</a>
+          <% end %>
           <a href="/logout" class="logout-link pull-right">Logout</a>
         <% end %>
       </div>
