@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :patient_name %>
     <%= form.text_field :name, id: :patient_name %>
   </div>
 
   <div class="actions">
-    <%= form.submit class: 'btn btn-primary' %>
+    <%= form.submit value: 'Create Injury Record', class: 'btn btn-primary' %>
     <%= link_to 'Back', patients_path, class: 'btn btn-secondary' %>
   </div>
 <% end %>

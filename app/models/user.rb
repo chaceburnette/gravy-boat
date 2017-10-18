@@ -9,14 +9,10 @@ class User < ApplicationRecord
   end
 
   def uploader?
-    roles.map(&:name).include?(Role::UPLOADER)
+    admin? || roles.map(&:name).include?(Role::UPLOADER)
   end
 
   def image_viewer?
-    roles.map(&:name).include?(Role::IMAGE_VIEWER)
-  end
-
-  def team_viewer?
-    roles.map(&:name).include?(Role::TEAM_VIEWER)
+    admin? || roles.map(&:name).include?(Role::IMAGE_VIEWER)
   end
 end
