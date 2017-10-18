@@ -1,23 +1,36 @@
 <%= form_with(model: patient, local: true) do |form| %>
-  <% if patient.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+  <div class="form">
+    <% if patient.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
 
-      <ul>
-      <% patient.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% patient.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="form-group col-xs-12">
+        <%= form.label :patient_name, class: 'form-label' %>
+        <%= form.text_field :name, id: :patient_name, class: 'form-control' %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :patient_name %>
-    <%= form.text_field :name, id: :patient_name %>
-  </div>
+    <div class="row">
+      <div class="form-group col-xs-12">
+        <%= form.label :injury_type, class: 'form-label' %>
+        <%= form.text_field :injury_type, id: :injury_type, class: 'form-control' %>
+      </div>
+    </div>
 
-  <div class="actions">
-    <%= form.submit value: 'Create Injury Record', class: 'btn btn-primary' %>
-    <%= link_to 'Back', patients_path, class: 'btn btn-secondary' %>
+    <div class="row">
+      <div class="col-xs-12">
+        <%= link_to 'Back', patients_path, class: 'btn btn-secondary' %>
+        <%= form.submit value: 'Save Injury Record', class: 'btn btn-primary pull-right' %>
+      </div>
+    </div>
   </div>
 <% end %>

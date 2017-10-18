@@ -18,7 +18,7 @@ body {
 	background-color: #457ab2;
 
 	a {
-		color: white;
+		color: white !important;
 		line-height: 50px;
     	font-size: 16px;
     	padding: 0 20px;
@@ -32,7 +32,27 @@ body {
 	color: black !important;
 }
 
-a, a:hover {
+a, a:hover, a:visited {
+	color: #666;
 	background-color: transparent;
 	text-decoration: none;
+}
+
+.grid {
+    padding: 5px;
+
+	.grid-row {
+        background-color: #ececec;
+        padding: 5px;
+        margin-top: 3px;
+        font-size: 16px;
+        
+        .grid-link {
+            text-decoration: underline;
+        }
+
+        .glyphicon {
+            padding: 5px;
+        }
+    }
 }

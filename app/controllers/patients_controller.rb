@@ -2,7 +2,7 @@ class PatientsController < AuthController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
   def index
-    @patients = Patient.all
+    @patients = Patient.all.order(:id)
   end
 
   def show
@@ -27,7 +27,8 @@ class PatientsController < AuthController
 
   def update
     if @patient.update(patient_params)
-      redirect_to @patient, notice: 'Patient was successfully updated.'
+      flash[:notice] = 'Patient was successfully updated.'
+      redirect_to action: :index
     else
       render :edit
     end
@@ -44,6 +45,6 @@ class PatientsController < AuthController
     end
 
     def patient_params
-      params.require(:patient).permit(:name)
+      params.require(:patient).permit(:name, :injury_type)
     end
 end

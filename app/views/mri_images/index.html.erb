@@ -1,39 +1,46 @@
 <h2>
-	Images for <%= @patient.name %>
+    Images for <%= @patient.name %>
 </h2>
-<div class="row">
-	<div class="col-xs-12">
-		<a class="btn btn-primary" href="/patients/<%=@patient.id%>/mri_images/new">Add New</a>
-	</div>
-</div>
 
-<div class="row">
-	<div class="col-xs-1">
-		<h4>ID</h4>
-	</div>
-	<div class="col-xs-3">
-		<h4>Upload Date/Time</h4>
-	</div>
-	<div class="col-xs-3">
-	</div>
-</div>
+<div class="grid">
+    <div class="row">
+        <div class="col-xs-12">
+            <a class="btn btn-primary pull-right" href="/patients/<%=@patient.id%>/mri_images/new">Add New</a>
+        </div>
+    </div>
 
-<% @mri_images.each do |image| %>
-	<div class="row">
-		<div class="col-xs-1">
-			<%= image.id %>
-		</div>
-		<div class="col-xs-3">
-			<%= image.created_at.to_formatted_s(:db) %>
-		</div>
-		<div class="col-xs-3">
-			<a href="<%= image.file.url %>">Download</a>
-		</div>
-	</div>
-<% end %>
+    <div class="row">
+        <div class="col-xs-1">
+            ID
+        </div>
+        <div class="col-xs-6">
+            Upload Date/Time
+        </div>
+        <div class="col-xs-5">
+        </div>
+    </div>
 
-<div class="row">
-	<div class="col-xs-12">
-    	<a class="btn btn-default" href="/patients">Back</a>
+    <% @mri_images.each do |image| %>
+        <div class="row grid-row">
+            <div class="col-xs-1">
+                <%= image.id %>
+            </div>
+            <div class="col-xs-6">
+                <%= image.created_at.to_formatted_s(:db) %>
+            </div>
+            <% if current_user.image_viewer? %>
+                <div class="col-xs-5 text-right">
+                    <a href="<%= image.file.url %>"><i class="glyphicon glyphicon-download"></i></a>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <a class="btn btn-default" href="/patients">Back</a>
+        </div>
     </div>
 </div>
