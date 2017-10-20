@@ -5,7 +5,9 @@
 <div class="grid">
     <div class="row">
         <div class="col-xs-12">
-            <a class="btn btn-primary pull-right" href="/patients/<%=@patient.id%>/mri_images/new">Add New</a>
+            <% if current_user.uploader? %>
+                <a class="btn btn-primary pull-right" href="/patients/<%=@patient.id%>/mri_images/new">Add New</a>
+            <% end %>
         </div>
     </div>
 

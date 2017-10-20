@@ -5,7 +5,9 @@
 <div class="grid">
   <div class="row">
     <div class="col-xs-12">
-      <%= link_to 'New Injury Record', new_patient_path, class: 'btn btn-primary pull-right' %>
+      <% if current_user.uploader? %>
+        <%= link_to 'New Injury Record', new_patient_path, class: 'btn btn-primary pull-right' %>
+      <% end %>
     </div>
   </div>
   <div class="row">
@@ -13,16 +15,20 @@
       ID
     </div>
     <div class="col-xs-8">
-      Patient Name
+      <% if current_user.uploader? %>
+        Patient Name
+      <% end %>
     </div>
   </div>
   <% @patients.each do |patient| %>
     <div class="row grid-row">
-      <div class="col-xs-1">
-        <%= patient.id %>
+      <div class="col-xs-1 grid-link">
+        <%= link_to patient.id, "/patients/#{patient.id}/mri_images" %>
       </div>
-      <div class="col-xs-8 grid-link">
-        <%= link_to patient.name, "/patients/#{patient.id}/mri_images" %>
+      <div class="col-xs-8">
+        <% if current_user.admin? || current_user.uploader? %>
+          <%= patient.name %>
+        <% end %>
       </div>
       <div class="col-xs-3 text-right">
         <%= link_to edit_patient_path(patient) do %>

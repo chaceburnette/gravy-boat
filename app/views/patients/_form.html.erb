@@ -12,19 +12,46 @@
       </div>
     <% end %>
 
-    <div class="row">
-      <div class="form-group col-xs-12">
-        <%= form.label :patient_name, class: 'form-label' %>
-        <%= form.text_field :name, id: :patient_name, class: 'form-control' %>
+    <% if patient.id.present? %>
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= form.label :id, class: 'form-label' %>
+          <%= form.label patient.id, class: 'form-control', disabled: true %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
-    <div class="row">
-      <div class="form-group col-xs-12">
-        <%= form.label :injury_type, class: 'form-label' %>
-        <%= form.text_field :injury_type, id: :injury_type, class: 'form-control' %>
+    <% if current_user.uploader? %>
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= form.label :patient_name, class: 'form-label' %>
+          <%= form.text_field :name, id: :patient_name, class: 'form-control' %>
+        </div>
       </div>
-    </div>
+    <% end %>
+
+    <% if current_user.image_viewer? %>
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= form.label :injury_type, class: 'form-label' %>
+          <%= form.text_field :injury_type, id: :injury_type, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= form.label :injury_grade, class: 'form-label' %>
+          <input class='form-control'/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= form.label :injury_severity, class: 'form-label' %>
+          <input class='form-control'/>
+        </div>
+      </div>
+    <% end %>
 
     <div class="row">
       <div class="col-xs-12">
