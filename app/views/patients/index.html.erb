@@ -10,33 +10,53 @@
       <% end %>
     </div>
   </div>
+
+  <br />
+
   <div class="row">
     <div class="col-xs-1">
       ID
     </div>
-    <div class="col-xs-8">
+    <div class="col-xs-4">
       <% if current_user.uploader? %>
         Patient Name
       <% end %>
     </div>
+    <div class="col-xs-4">
+      Read?
+    </div>
+    <div class="col-xs-3 text-right">
+      Actions
+    </div>
   </div>
+
   <% @patients.each do |patient| %>
     <div class="row grid-row">
-      <div class="col-xs-1 grid-link">
-        <%= link_to patient.id, "/patients/#{patient.id}/mri_images" %>
+      <div class="col-xs-1">
+        <%= patient.id %>
       </div>
-      <div class="col-xs-8">
-        <% if current_user.admin? || current_user.uploader? %>
+      <div class="col-xs-4">
+        <% if current_user.uploader? %>
           <%= patient.name %>
+        <% end %>
+      </div>
+      <div class="col-xs-4">
+        <% if patient.read %>
+          <i class="glyphicon glyphicon-check"></i>
         <% end %>
       </div>
       <div class="col-xs-3 text-right">
         <%= link_to edit_patient_path(patient) do %>
-          <i class="glyphicon glyphicon-edit"></i>
+          <%= link_to "/patients/#{patient.id}/mri_images" do %>
+            <i class="glyphicon glyphicon-tasks" title="Files"></i>
+          <% end %>
+        <% end %>
+        <%= link_to edit_patient_path(patient) do %>
+          <i class="glyphicon glyphicon-edit" title="Edit"></i>
         <% end %>
         <% if current_user.admin? %>
           <%= link_to patient, method: :delete, data: { confirm: "Are you sure you want to delete #{patient.name}?" } do %>
-            <i class="glyphicon glyphicon-trash"></i>
+            <i class="glyphicon glyphicon-trash" title="Delete"></i>
           <% end %>
         <% end %>
       </div>

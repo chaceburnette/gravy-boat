@@ -32,6 +32,13 @@
 
     <% if current_user.image_viewer? %>
       <div class="row">
+        <div class="form-group form-check col-xs-12">
+          <%= form.check_box :read, id: :read, class: 'form-check-input' %>
+          <%= form.label :read, class: 'form-check-label' %>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="form-group col-xs-12">
           <%= form.label :injury_type, class: 'form-label' %>
           <%= form.text_field :injury_type, id: :injury_type, class: 'form-control' %>
