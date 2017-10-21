@@ -45,6 +45,6 @@ class PatientsController < AuthController
     end
 
     def patient_params
-      params.require(:patient).permit(:name, :injury_type, :read)
+      params.require(:patient).permit(:name, :injury_type, :read, :injury_date)
     end
 end

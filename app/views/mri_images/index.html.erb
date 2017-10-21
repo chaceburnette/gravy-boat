@@ -1,5 +1,9 @@
 <h2>
-    Images for <%= @patient.name %>
+    <% if current_user.uploader? %>
+    Images for <%= "#{@patient.id}(#{@patient.name})" %>
+    <% else %>
+        Files for <%= @patient.id %>
+    <% end %>
 </h2>
 
 <div class="grid">
@@ -42,7 +46,8 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <a class="btn btn-default" href="/patients">Back</a>
+            <a class="btn btn-secondary" href="/patients">Back</a>
+            <a class="btn btn-primary pull-right" href="/patients/<%=@patient.id%>/edit">Edit Injury</a>
         </div>
     </div>
 </div>

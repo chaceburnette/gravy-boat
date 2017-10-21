@@ -21,15 +21,24 @@
       </div>
     <% end %>
 
+    <!-- Uploader -->
     <% if current_user.uploader? %>
       <div class="row">
         <div class="form-group col-xs-12">
           <%= form.label :patient_name, class: 'form-label' %>
-          <%= form.text_field :name, id: :patient_name, class: 'form-control' %>
+          <%= form.text_field :name, id: :patient_name, class: 'form-control', required: true %>
         </div>
       </div>
     <% end %>
 
+    <div class="row">
+      <div class="form-group col-xs-12">
+        <%= form.label :injury_date, class: 'form-label' %>
+        <%= form.date_field :injury_date, id: :injury_date, class: 'form-control', required: true %>
+      </div>
+    </div>
+
+    <!-- Image Viewer -->
     <% if current_user.image_viewer? %>
       <div class="row">
         <div class="form-group form-check col-xs-12">
