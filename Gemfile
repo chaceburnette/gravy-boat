@@ -17,6 +17,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'carrierwave', '~> 1.0'
 gem "fog-aws"
 gem "dicom"
+gem "aws-sdk", '~> 2'
 # gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
 

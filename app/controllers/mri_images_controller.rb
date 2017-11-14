@@ -5,6 +5,12 @@ class MriImagesController < AuthController
 	end
 
 	def new
+		temporary_credentials = AWSService.get_temporary_credentials
+		@bucket = AWSService.bucket_name
+		@region = AWSService.region
+        @awskey = temporary_credentials.credentials.access_key_id
+        @awssecret = temporary_credentials.credentials.secret_access_key
+        @session_token = temporary_credentials.credentials.session_token
 	end
 
 	def create
