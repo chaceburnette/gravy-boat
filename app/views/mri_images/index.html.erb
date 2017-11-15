@@ -1,0 +1,53 @@
+<h2>
+    <% if current_user.uploader? %>
+    Images for <%= "#{@patient.id}(#{@patient.name})" %>
+    <% else %>
+        Files for <%= @patient.id %>
+    <% end %>
+</h2>
+
+<div class="grid">
+    <div class="row">
+        <div class="col-xs-12">
+            <% if current_user.uploader? %>
+                <a class="btn btn-primary pull-right" href="/patients/<%=@patient.id%>/mri_images/new">Add New</a>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-1">
+            ID
+        </div>
+        <div class="col-xs-6">
+            Upload Date/Time
+        </div>
+        <div class="col-xs-5">
+        </div>
+    </div>
+
+    <% @mri_images.each do |image| %>
+        <div class="row grid-row">
+            <div class="col-xs-1">
+                <%= image.id %>
+            </div>
+            <div class="col-xs-6">
+                <%= image.created_at.to_formatted_s(:db) %>
+            </div>
+            <% if current_user.image_viewer? %>
+                <div class="col-xs-5 text-right">
+                    <a href='<%= "https://s3.#{AWSService.region}.amazonaws.com/#{AWSService.bucket_name}/#{image.file}" %>'><i class="glyphicon glyphicon-download"></i></a>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <a class="btn btn-secondary" href="/patients">Back</a>
+            <a class="btn btn-primary pull-right" href="/patients/<%=@patient.id%>/edit">Edit Injury</a>
+        </div>
+    </div>
+</div>

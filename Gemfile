@@ -14,8 +14,14 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'carrierwave', '~> 1.0'
+gem "fog-aws"
+gem "dicom"
+gem "aws-sdk", '~> 2'
 # gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
+gem 'sprockets', '>= 3.0.0'
+gem 'sprockets-es6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

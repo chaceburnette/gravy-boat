@@ -1,0 +1,79 @@
+<%= form_with(model: patient, local: true) do |form| %>
+  <div class="form">
+    <% if patient.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+
+        <ul>
+        <% patient.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if patient.id.present? %>
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= form.label :id, class: 'form-label' %>
+          <%= form.label patient.id, class: 'form-control', disabled: true %>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Uploader -->
+    <% if current_user.uploader? %>
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= form.label :patient_name, class: 'form-label' %>
+          <%= form.text_field :name, id: :patient_name, class: 'form-control', required: true %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="form-group col-xs-12">
+        <%= form.label :injury_date, class: 'form-label' %>
+        <%= form.date_field :injury_date, id: :injury_date, class: 'form-control', required: true %>
+      </div>
+    </div>
+
+    <!-- Image Viewer -->
+    <% if current_user.image_viewer? %>
+      <div class="row">
+        <div class="form-group form-check col-xs-12">
+          <%= form.check_box :read, id: :read, class: 'form-check-input' %>
+          <%= form.label :read, class: 'form-check-label' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= form.label :injury_type, class: 'form-label' %>
+          <%= form.text_field :injury_type, id: :injury_type, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= form.label :injury_grade, class: 'form-label' %>
+          <input class='form-control'/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= form.label :injury_severity, class: 'form-label' %>
+          <input class='form-control'/>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <%= link_to 'Back', patients_path, class: 'btn btn-secondary' %>
+        <%= form.submit value: 'Save Injury Record', class: 'btn btn-primary pull-right' %>
+      </div>
+    </div>
+  </div>
+<% end %>
