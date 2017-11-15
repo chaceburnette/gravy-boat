@@ -18,7 +18,7 @@ class AWSService
   def self.get_temporary_credentials
     create_client.get_federation_token({
       name: 'tempUser',
-      duration_seconds: 129600, # 1.5 days
+      duration_seconds: 1800, # 30 minutes
       policy: bucket_policy
     })
   end
