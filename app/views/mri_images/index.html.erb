@@ -36,7 +36,7 @@
             </div>
             <% if current_user.image_viewer? %>
                 <div class="col-xs-5 text-right">
-                    <a href="<%= image.file.url %>"><i class="glyphicon glyphicon-download"></i></a>
+                    <a href='<%= "https://s3.#{AWSService.region}.amazonaws.com/#{AWSService.bucket_name}/#{image.file}" %>'><i class="glyphicon glyphicon-download"></i></a>
                 </div>
             <% end %>
         </div>

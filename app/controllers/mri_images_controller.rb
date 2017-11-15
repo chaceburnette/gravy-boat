@@ -6,6 +6,7 @@ class MriImagesController < AuthController
 
 	def new
 		temporary_credentials = AWSService.get_temporary_credentials
+		@patient_id = params[:patient_id]
 		@bucket = AWSService.bucket_name
 		@region = AWSService.region
         @awskey = temporary_credentials.credentials.access_key_id
@@ -14,7 +15,7 @@ class MriImagesController < AuthController
 	end
 
 	def create
-		mri_image = MriImage.new(file: params[:file].open)
+		mri_image = MriImage.new(file: params[:filePath])
 		mri_image.patient = @patient
 		mri_image.save
 		redirect_to action: :index

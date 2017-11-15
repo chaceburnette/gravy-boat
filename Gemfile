@@ -20,6 +20,8 @@ gem "dicom"
 gem "aws-sdk", '~> 2'
 # gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
+gem 'sprockets', '>= 3.0.0'
+gem 'sprockets-es6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

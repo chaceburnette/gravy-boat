@@ -4,23 +4,28 @@
 	window.awskey = '<%= @awskey %>';
 	window.awssecret = '<%= @awssecret %>';
 	window.sessionToken = '<%= @session_token%>';
+  window.patientId = <%= @patient_id %>;
 </script>
 
 <h2>
   Add MRI Image for <%= @patient.name %>
 </h2>
 
-<%= form_with(model: @mri_image, local: true) do |form| %>
-  <div class="field">
-    <%= form.label "MRI File" %>
-    <%= form.file_field :file, required: true, id: 'file-input-field' %>
-    <div id="upload-progress">
+<%= form_with(local: true) do |form| %>
+  <div ng-app="mriUploadApp" ng-controller="MriUploadController as vm">
+    {{vm.title}}
+    <div class="field">
+      <%= form.label "MRI File" %>
+      <%= form.file_field :file, required: true, id: 'file-input-field' %>
+      <div ng-if="vm.uploading">
+        {{vm.percentLoaded}} %
+      </div>
     </div>
-  </div>
 
-  <div class="actions">
-    <!--<%= form.submit class: 'btn btn-primary' %>-->
-    <a class="btn btn-primary" href="javascript:uploadToAws()">Submit</a>
-    <a class="btn btn-secondary" href="/patients/<%=@patient.id%>/mri_images">Back</a>
+    <div class="actions">
+      <!--<%= form.submit class: 'btn btn-primary' %>-->
+      <a class="btn btn-primary" ng-click="vm.uploadToAws()">Submit</a>
+      <a class="btn btn-secondary" href="/patients/<%=@patient.id%>/mri_images">Back</a>
+    </div>
   </div>
 <% end %>
