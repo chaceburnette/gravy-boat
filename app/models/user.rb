@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :user_role
   has_many :roles, through: :user_role
 
+  before_save :normalize
+
   def admin?
     roles.map(&:name).include?(Role::ADMIN)
   end
@@ -14,5 +16,9 @@ class User < ApplicationRecord
 
   def image_viewer?
     admin? || roles.map(&:name).include?(Role::IMAGE_VIEWER)
+  end
+
+  def normalize
+    email.downcase!
   end
 end
