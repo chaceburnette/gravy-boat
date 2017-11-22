@@ -10,9 +10,12 @@ class AnonymizerJob < ActiveJob::Base
       anonymize_files
       zip_files
       upload_file
+      save_anonymous_file_path
       cleanup
+      true
     rescue
       cleanup
+      false
     end
   end
 
@@ -27,12 +30,12 @@ class AnonymizerJob < ActiveJob::Base
 
   def download_file
     ensure_directory
-    File.open(@original_file_path, 'wb') do |file|
-      resp = AWSService.create_s3_client.get_object({ bucket: AWSService.bucket_name, key: @mri_image.file }, target: file)
-    end
+    Rails.logger.info('downloading file')
+    AWSService.create_s3_client.get_object(bucket: AWSService.bucket_name, key: @mri_image.file, response_target: @original_file_path)
   end
 
   def extract_file
+    Rails.logger.info('extracting file')
     FileUtils.mkdir_p(@extracted_destination)
 
     Zip::File.open(@original_file_path) do |zip_file|
@@ -44,10 +47,12 @@ class AnonymizerJob < ActiveJob::Base
   end
 
   def anonymize_files
+    Rails.logger.info('anonymizing file')
     DicomService.anonymize_directory(@extracted_destination)
   end
 
   def zip_files
+    Rails.logger.info('zipping file')
     Zip::File.open(@anonymized_zip_path, 'w') do |zipfile|
       Dir.glob("#{@extracted_destination}/**/*.*")
         .reject{ |file| File.basename(file).start_with?("._") }
@@ -58,13 +63,20 @@ class AnonymizerJob < ActiveJob::Base
   end
 
   def upload_file
+    Rails.logger.info('uploading file')
     bucket = AWSService.create_s3_resource.bucket(AWSService.bucket_name)
     file_obj = bucket.object("#{@directory_name}/anonymous.zip").upload_file(@anonymized_zip_path)
   end
 
   def cleanup
+    Rails.logger.info('performing cleanup')
     path_unique_id = @original_file_path.split('/')[1]
     FileUtils.rm_rf("upload/#{path_unique_id}")
+  end
+
+  def save_anonymous_file_path
+    @mri_image.anonymous_file = @anonymized_zip_path
+    @mri_image.save
   end
 
   def ensure_directory
