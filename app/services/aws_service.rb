@@ -1,5 +1,9 @@
 class AWSService
 
+  def self.credentials
+    Aws::Credentials.new(ENV['S3_ACCESS_KEY_ID'], ENV['S3_ACCESS_KEY_SECRET'])
+  end
+
   def self.bucket_name
     ENV['S3_BUCKET']
   end
@@ -8,17 +12,31 @@ class AWSService
     ENV['S3_REGION']
   end
 
-  def self.create_client
+  def self.create_sts_client
     Aws::STS::Client.new(
       region: region,
-      credentials: Aws::Credentials.new(ENV['S3_ACCESS_KEY_ID'], ENV['S3_ACCESS_KEY_SECRET'])
+      credentials: credentials
+    )
+  end
+
+  def self.create_s3_client
+    Aws::S3::Client.new(
+      region: region,
+      credentials: credentials
+    )
+  end
+
+  def self.create_s3_resource
+    Aws::S3::Resource.new(
+      region: region,
+      credentials: credentials
     )
   end
 
   def self.get_temporary_credentials
-    create_client.get_federation_token({
+    create_sts_client.get_federation_token({
       name: 'tempUser',
-      duration_seconds: 1800, # 30 minutes
+      duration_seconds: 1800,
       policy: bucket_policy
     })
   end
