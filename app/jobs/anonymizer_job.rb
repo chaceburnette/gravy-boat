@@ -1,3 +1,5 @@
+require 'zip'
+
 class AnonymizerJob < ActiveJob::Base
   queue_as :anonimyzer
 
