@@ -37,7 +37,7 @@ class AnonymizerJob < ActiveJob::Base
     Rails.logger.info('extracting file')
     FileUtils.mkdir_p(@extracted_destination)
 
-    Zip::File.open(@original_file_path) do |zip_file|
+    ::Zip::File.open(@original_file_path) do |zip_file|
       zip_file.each do |f|
         fpath = File.join(@extracted_destination, f.name)
         zip_file.extract(f, fpath) unless File.exist?(fpath)
@@ -52,7 +52,7 @@ class AnonymizerJob < ActiveJob::Base
 
   def zip_files
     Rails.logger.info('zipping file')
-    Zip::File.open(@anonymized_zip_path, 'w') do |zipfile|
+    ::Zip::File.open(@anonymized_zip_path, 'w') do |zipfile|
       Dir.glob("#{@extracted_destination}/**/*.*")
         .reject{ |file| File.basename(file).start_with?("._") }
         .each do |file|
