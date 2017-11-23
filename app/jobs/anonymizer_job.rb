@@ -12,10 +12,9 @@ class AnonymizerJob < ActiveJob::Base
       upload_file
       save_anonymous_file_path
       cleanup
-      true
-    rescue
+    rescue => error
+      Rails.logger.error(error)
       cleanup
-      false
     end
   end
 
