@@ -45,8 +45,7 @@ class MriUploadController {
                 Bucket: bucket,
                 Key: filePath,
                 ContentType: file.type,
-                Body: file,
-                ACL: 'public-read'
+                Body: file
             }
         });
 

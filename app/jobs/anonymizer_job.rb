@@ -66,7 +66,7 @@ class AnonymizerJob < ActiveJob::Base
   def upload_file
     Rails.logger.info('uploading file')
     bucket = AWSService.create_s3_resource.bucket(AWSService.bucket_name)
-    file_obj = bucket.object("#{@directory_name}/anonymous.zip").upload_file(@anonymized_zip_path)
+    file_obj = bucket.object("#{@directory_name}/anonymous.zip").upload_file(@anonymized_zip_path, { acl: 'public-read' })
   end
 
   def cleanup
