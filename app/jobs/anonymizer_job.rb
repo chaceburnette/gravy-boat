@@ -1,7 +1,7 @@
 require 'zip'
 
 class AnonymizerJob < ActiveJob::Base
-  queue_as :anonimyzer
+  queue_as :anonymizer
 
   def perform(mri_image_id)
     begin
@@ -15,8 +15,8 @@ class AnonymizerJob < ActiveJob::Base
       save_anonymous_file_path
       cleanup
     rescue => error
-      Rails.logger.error(error)
       cleanup
+      Rollbar.error(error, image_id: @mri_image.id, error: error)
     end
   end
 
@@ -31,12 +31,12 @@ class AnonymizerJob < ActiveJob::Base
 
   def download_file
     ensure_directory
-    Rails.logger.info('downloading file')
+    Rollbar.info('downloading file', image_id: @mri_image.id)
     AWSService.create_s3_client.get_object(bucket: AWSService.bucket_name, key: @mri_image.file, response_target: @original_file_path)
   end
 
   def extract_file
-    Rails.logger.info('extracting file')
+    Rollbar.info('extracting file')
     FileUtils.mkdir_p(@extracted_destination)
 
     ::Zip::File.open(@original_file_path) do |zip_file|
@@ -48,12 +48,12 @@ class AnonymizerJob < ActiveJob::Base
   end
 
   def anonymize_files
-    Rails.logger.info('anonymizing file')
+    Rollbar.info('anonymizing file', image_id: @mri_image.id)
     DicomService.anonymize_directory(@extracted_destination)
   end
 
   def zip_files
-    Rails.logger.info('zipping file')
+    Rollbar.info('zipping file', image_id: @mri_image.id)
     ::Zip::File.open(@anonymized_zip_path, 'w') do |zipfile|
       Dir.glob("#{@extracted_destination}/**/*.*")
         .reject{ |file| File.basename(file).start_with?("._") }
@@ -64,13 +64,13 @@ class AnonymizerJob < ActiveJob::Base
   end
 
   def upload_file
-    Rails.logger.info('uploading file')
+    Rollbar.info('uploading file', image_id: @mri_image.id)
     bucket = AWSService.create_s3_resource.bucket(AWSService.bucket_name)
     file_obj = bucket.object("#{@directory_name}/anonymous.zip").upload_file(@anonymized_zip_path, { acl: 'public-read' })
   end
 
   def cleanup
-    Rails.logger.info('performing cleanup')
+    Rollbar.info('performing cleanup', image_id: @mri_image.id)
     path_unique_id = @original_file_path.split('/')[1]
     FileUtils.rm_rf("upload/#{path_unique_id}")
   end
