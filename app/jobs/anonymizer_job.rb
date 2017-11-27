@@ -41,8 +41,10 @@ class AnonymizerJob < ActiveJob::Base
 
     ::Zip::File.open(@original_file_path) do |zip_file|
       zip_file.each do |f|
-        fpath = File.join(@extracted_destination, f.name)
-        zip_file.extract(f, fpath) unless File.exist?(fpath)
+        filePath = File.join(@extracted_destination, f.name)
+        fileDirectory = File.dirname(filePath)
+        FileUtils.mkpath(fileDirectory)
+        zip_file.extract(f, filePath) unless File.exist?(filePath)
       end
     end
   end
@@ -55,10 +57,11 @@ class AnonymizerJob < ActiveJob::Base
   def zip_files
     Rollbar.info('zipping file', image_id: @mri_image.id)
     ::Zip::File.open(@anonymized_zip_path, 'w') do |zipfile|
-      Dir.glob("#{@extracted_destination}/**/*.*")
+      Dir.glob("#{@extracted_destination}/**/*")
         .reject{ |file| File.basename(file).start_with?("._") }
         .each do |file|
-          zipfile.add(File.basename(file), file)
+          relative_path = file.gsub("#{@extracted_destination}/", '')
+          zipfile.add(relative_path, file)
         end
     end
   end
