@@ -7,13 +7,21 @@ class DicomService
     dicom_files.each do |file_path|
       dicom_file = DObject.read(file_path)
       unless dicom_file.print.empty?
-        anonymize(dicom_file)
-        dicom_file.write(file_path)
+        if ['SR', 'DOC'].include?(dicom_file.modality.value)
+          delete_file(file_path)
+        else
+          anonymize(dicom_file)
+          dicom_file.write(file_path)
+        end
       end
     end
   end
 
   private
+
+  def self.delete_file(file_path)
+    File.delete(file_path) if File.exists?(file_path)
+  end
 
   def self.anonymize(dicom_file)
     anonymize_field(dicom_file["0008,0080"], "Institution Name")
