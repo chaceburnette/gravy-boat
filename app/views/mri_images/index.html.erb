@@ -35,9 +35,15 @@
                 <%= image.created_at.to_formatted_s(:db) %>
             </div>
             <% if current_user.image_viewer? %>
-                <div class="col-xs-5 text-right">
-                    <a href='<%= "https://s3.#{AWSService.region}.amazonaws.com/#{AWSService.bucket_name}/#{image.anonymous_file}" %>'><i class="glyphicon glyphicon-download"></i></a>
-                </div>
+                <% if image.anonymous_file.present? %>
+                    <div class="col-xs-5 text-right">
+                        <a href='<%= "https://s3.#{AWSService.region}.amazonaws.com/#{AWSService.bucket_name}/#{image.anonymous_file}" %>'><i class="glyphicon glyphicon-download"></i></a>
+                    </div>
+                <% else %>
+                    <div class="col-xs-5 text-right">
+                        Processing...
+                    </div>
+                <% end %>
             <% end %>
         </div>
     <% end %>
