@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171122163928) do
+ActiveRecord::Schema.define(version: 20171129063938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(version: 20171122163928) do
     t.string "injury_type"
     t.boolean "read", default: false
     t.datetime "injury_date"
+    t.string "player_id"
+    t.string "player_position"
+    t.boolean "reinjury"
   end
 
   create_table "roles", force: :cascade do |t|

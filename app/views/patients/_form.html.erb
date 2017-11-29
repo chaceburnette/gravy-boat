@@ -29,6 +29,27 @@
           <%= form.text_field :name, id: :patient_name, class: 'form-control', required: true %>
         </div>
       </div>
+
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= form.label 'Athlete ID', class: 'form-label' %>
+          <%= form.text_field :player_id, id: :player_id, class: 'form-control', required: true %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <%= form.label :player_position, class: 'form-label' %>
+          <%= form.text_field :player_position, id: :player_position, class: 'form-control', required: true %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group form-check col-xs-12">
+          <%= form.check_box :reinjury, id: :read, class: 'form-check-input' %>
+          <%= form.label :reinjury, class: 'form-check-label' %>
+        </div>
+      </div>
     <% end %>
 
     <div class="row">
