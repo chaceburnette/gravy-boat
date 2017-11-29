@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-xs-12">
             <% if current_user.uploader? %>
-                <a class="btn btn-primary pull-right" href="/patients/<%=@patient.id%>/mri_images/new">Add New</a>
+                <a class="btn btn-primary pull-right" href="/patients/<%=@patient.id%>/mri_images/new">Upload New File</a>
             <% end %>
         </div>
     </div>
@@ -36,7 +36,7 @@
             </div>
             <% if current_user.image_viewer? %>
                 <div class="col-xs-5 text-right">
-                    <a href='<%= "https://s3.#{AWSService.region}.amazonaws.com/#{AWSService.bucket_name}/#{image.file}" %>'><i class="glyphicon glyphicon-download"></i></a>
+                    <a href='<%= "https://s3.#{AWSService.region}.amazonaws.com/#{AWSService.bucket_name}/#{image.anonymous_file}" %>'><i class="glyphicon glyphicon-download"></i></a>
                 </div>
             <% end %>
         </div>

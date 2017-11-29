@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.4.1'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -18,10 +19,12 @@ gem 'carrierwave', '~> 1.0'
 gem "fog-aws"
 gem "dicom"
 gem "aws-sdk", '~> 2'
-# gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
+gem 'sidekiq'
+gem 'rubyzip'
+gem 'rollbar'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
