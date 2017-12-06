@@ -61,7 +61,7 @@ class PatientsController < AuthController
           :central_tendon_disruption,
           :musculotendinous,
           :fluid_collection,
-          :retraction_distance
-          )
+          :retraction_distance,
+          :number_of_muscles)
     end
 end
