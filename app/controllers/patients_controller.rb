@@ -45,6 +45,23 @@ class PatientsController < AuthController
     end
 
     def patient_params
-      params.require(:patient).permit(:name, :injury_type, :read, :injury_date, :player_id, :player_position, :reinjury)
+      params.require(:patient)
+        .permit(
+          :name,
+          :read,
+          :injury_date,
+          :player_id,
+          :player_position,
+          :reinjury,
+          :muscle,
+          :peetrons_grade,
+          :origin_lesion_distance,
+          :muscle_length,
+          :free_tendon_involvement,
+          :central_tendon_disruption,
+          :musculotendinous,
+          :fluid_collection,
+          :retraction_distance
+          )
     end
 end
