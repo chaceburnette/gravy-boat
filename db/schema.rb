@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171129063938) do
+ActiveRecord::Schema.define(version: 20171206022906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 20171129063938) do
     t.string "player_id"
     t.string "player_position"
     t.boolean "reinjury"
+    t.string "muscle"
+    t.integer "peetrons_grade"
+    t.decimal "origin_lesion_distance"
+    t.decimal "muscle_length"
+    t.boolean "free_tendon_involvement"
+    t.boolean "central_tendon_disruption"
+    t.boolean "musculotendinous"
+    t.string "fluid_collection"
+    t.decimal "retraction_distance"
   end
 
   create_table "roles", force: :cascade do |t|

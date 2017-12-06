@@ -14,9 +14,13 @@
 
     <% if patient.id.present? %>
       <div class="row">
-        <div class="form-group col-xs-12">
+        <div class="form-group col-xs-6">
           <%= form.label :id, class: 'form-label' %>
           <%= form.label patient.id, class: 'form-control', disabled: true %>
+        </div>
+        <div class="form-group col-xs-6">
+          <%= form.label :injury_date, class: 'form-label' %>
+          <%= form.date_field :injury_date, id: :injury_date, class: 'form-control', required: true %>
         </div>
       </div>
     <% end %>
@@ -52,13 +56,6 @@
       </div>
     <% end %>
 
-    <div class="row">
-      <div class="form-group col-xs-12">
-        <%= form.label :injury_date, class: 'form-label' %>
-        <%= form.date_field :injury_date, id: :injury_date, class: 'form-control', required: true %>
-      </div>
-    </div>
-
     <!-- Image Viewer -->
     <% if current_user.image_viewer? %>
       <div class="row">
@@ -69,23 +66,47 @@
       </div>
 
       <div class="row">
-        <div class="form-group col-xs-12">
-          <%= form.label :injury_type, class: 'form-label' %>
-          <%= form.text_field :injury_type, id: :injury_type, class: 'form-control' %>
+        <div class="form-group col-xs-12 col-lg-4">
+          <%= form.label "Muscle Injured", class: 'form-label' %>
+          <%= form.text_field :muscle, id: :muscle, class: 'form-control' %>
+        </div>
+        <div class="form-group col-xs-12 col-lg-4">
+          <%= form.label "Modified Peetrons", class: 'form-label' %>
+          <%= form.select :peetrons_grade, [0, 1, 2, 3], {}, class: 'form-control' %>
+        </div>
+        <div class="form-group col-xs-12 col-lg-4">
+          <%= form.label "Fluid Collection", class: 'form-label' %>
+          <%= form.select :fluid_collection, ["both", "intramuscular", "extramuscular"], {}, class: 'form-control' %>
         </div>
       </div>
 
       <div class="row">
-        <div class="form-group col-xs-12">
-          <%= form.label :injury_grade, class: 'form-label' %>
-          <input class='form-control'/>
+        <div class="form-group col-xs-12 col-lg-4">
+          <%= form.label "Muscle Length", class: 'form-label' %>
+          <%= form.text_field :muscle_length, id: :muscle_length, class: 'form-control', type: "number", step: "0.001" %>
+        </div>
+        <div class="form-group col-xs-12 col-lg-4">
+          <%= form.label "Distance from origin to lesion (cm)", class: 'form-label' %>
+          <%= form.text_field :origin_lesion_distance, id: :origin_lesion_distance, class: 'form-control', type: "number", step: "0.001" %>
+        </div>
+        <div class="form-group col-xs-12 col-lg-4">
+          <%= form.label "Distance of retraction (cm)", class: 'form-label' %>
+          <%= form.text_field :retraction_distance, id: :retraction_distance, class: 'form-control', type: "number", step: "0.001" %>
         </div>
       </div>
 
       <div class="row">
-        <div class="form-group col-xs-12">
-          <%= form.label :injury_severity, class: 'form-label' %>
-          <input class='form-control'/>
+        <div class="form-group form-check col-xs-12">
+          <%= form.check_box :free_tendon_involvement, id: :free_tendon_involvement, class: 'form-check-input' %>
+          <%= form.label "Proximal free tendon involvement", class: 'form-check-label' %>
+        </div>
+        <div class="form-group form-check col-xs-12">
+          <%= form.check_box :central_tendon_disruption, id: :central_tendon_disruption, class: 'form-check-input' %>
+          <%= form.label "Central tendon disruption", class: 'form-check-label' %>
+        </div>
+        <div class="form-group form-check col-xs-12">
+          <%= form.check_box :musculotendinous, id: :musculotendinous, class: 'form-check-input' %>
+          <%= form.label "Musculotendinous junction involvement", class: 'form-check-label' %>
         </div>
       </div>
     <% end %>
