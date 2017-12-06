@@ -67,8 +67,8 @@
 
       <div class="row">
         <div class="form-group col-xs-12 col-lg-4">
-          <%= form.label "Muscle Injured", class: 'form-label' %>
-          <%= form.text_field :muscle, id: :muscle, class: 'form-control' %>
+          <%= form.label "Primary Muscle Injured", class: 'form-label' %>
+          <%= form.select :muscle, ["biceps femoris long head", "biceps femoris short head", "semimembranosus", "semitendinosis"], {}, class: 'form-control' %>
         </div>
         <div class="form-group col-xs-12 col-lg-4">
           <%= form.label "Modified Peetrons", class: 'form-label' %>
@@ -76,7 +76,7 @@
         </div>
         <div class="form-group col-xs-12 col-lg-4">
           <%= form.label "Fluid Collection", class: 'form-label' %>
-          <%= form.select :fluid_collection, ["both", "intramuscular", "extramuscular"], {}, class: 'form-control' %>
+          <%= form.select :fluid_collection, ["none", "both", "intramuscular", "extramuscular"], {}, class: 'form-control' %>
         </div>
       </div>
 
@@ -92,6 +92,13 @@
         <div class="form-group col-xs-12 col-lg-4">
           <%= form.label "Distance of retraction (cm)", class: 'form-label' %>
           <%= form.text_field :retraction_distance, id: :retraction_distance, class: 'form-control', type: "number", step: "0.001" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-xs-12 col-lg-4">
+          <%= form.label "Number of Affected Muscles", class: 'form-label' %>
+          <%= form.text_field :number_of_muscles, id: :number_of_muscles, class: 'form-control', type: "number" %>
         </div>
       </div>
 
