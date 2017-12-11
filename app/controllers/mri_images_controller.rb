@@ -14,6 +14,10 @@ class MriImagesController < AuthController
         @session_token = temporary_credentials.credentials.session_token
   end
 
+  def show
+    @mri_image = MriImage.find(params[:id])
+  end
+
   def create
     mri_image = MriImage.new(file: params[:filePath])
     mri_image.patient = @patient

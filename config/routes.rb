@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   get 'patients/:patient_id/mri_images' => 'mri_images#index'
   get 'patients/:patient_id/mri_images/new' => 'mri_images#new'
+  get 'patients/:patient_id/mri_images/:id' => 'mri_images#show'
   post 'patients/:patient_id/mri_images/new' => 'mri_images#create'
 end
