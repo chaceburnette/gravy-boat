@@ -18,6 +18,13 @@
     <%= form.text_field :email, id: :email %>
   </div>
 
+  <% if @user.email != 'admin' %>
+    <div class="field">
+      <%= form.label :password %>
+      <%= form.text_field :password, id: :password %>
+    </div>
+  <% end %>
+
   <div class="field">
       <%= check_box("user", "admin?") %>
       <%= Role::ADMIN %>

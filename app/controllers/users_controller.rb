@@ -1,5 +1,5 @@
 class UsersController < AdminController
-  before_action :find_user, only: [:edit, :update]
+  before_action :find_user, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -23,7 +23,6 @@ class UsersController < AdminController
 
   def update
     if @user.update(user_params)
-
       @user.user_role.delete_all
       UserRole.new(user: @user, role: Role.where(name: Role::ADMIN).first).save if role_params[:admin] == "1"
       UserRole.new(user: @user, role: Role.where(name: Role::UPLOADER).first).save if role_params[:uploader] == "1"
@@ -33,6 +32,11 @@ class UsersController < AdminController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @user.destroy!
+    redirect_to users_path, notice: 'User was successfully deleted.'
   end
 
   private

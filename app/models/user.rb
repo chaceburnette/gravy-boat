@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :user_role
+  has_many :user_role, :dependent => :destroy
   has_many :roles, through: :user_role
 
   before_save :normalize
