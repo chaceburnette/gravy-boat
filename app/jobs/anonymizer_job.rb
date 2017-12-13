@@ -6,6 +6,7 @@ class AnonymizerJob < ActiveJob::Base
   def perform(mri_image_id)
     begin
       @mri_image = MriImage.find(mri_image_id)
+      @patient = @mri_image.patient
       set_paths
       download_file
       extract_file
@@ -51,7 +52,7 @@ class AnonymizerJob < ActiveJob::Base
 
   def anonymize_files
     Rollbar.info('anonymizing file', image_id: @mri_image.id)
-    DicomService.anonymize_directory(@extracted_destination)
+    DicomService.anonymize_directory(@extracted_destination, @patient.id)
   end
 
   def zip_files

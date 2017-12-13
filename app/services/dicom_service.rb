@@ -1,8 +1,8 @@
 class DicomService
 
-  def self.anonymize_directory(path)
+  def self.anonymize_directory(path, patient_id)
     include DICOM
-
+    @patient_id = patient_id
     dicom_files = Dir.glob("#{path}/**/*")
     dicom_files.each do |file_path|
       dicom_file = DObject.read(file_path)
@@ -28,7 +28,7 @@ class DicomService
     anonymize_field(dicom_file["0008,0081"], "Institution Address")
     anonymize_field(dicom_file["0008,1070"], "Operator Name")
     anonymize_field(dicom_file["0008,0090"], "Referring Physician")
-    anonymize_field(dicom_file["0010,0010"], "Patient Name")
+    anonymize_field(dicom_file["0010,0010"], "injuryId #{@patient_id}")
     anonymize_field(dicom_file["0010,0030"], "Patient D.O.B.")
   end
 
