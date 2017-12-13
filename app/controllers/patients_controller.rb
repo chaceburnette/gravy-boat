@@ -65,6 +65,10 @@ class PatientsController < AuthController
           :musculotendinous_proximal_distal,
           :fluid_collection,
           :retraction_distance,
+          :edema_largest_csa,
+          :edema_longitude_length,
+          :hamstring_largest_csa,
+          :quadricep_largest_csa,
           :secondary_muscle,
           :secondary_peetrons_grade,
           :secondary_origin_lesion_distance,
@@ -76,6 +80,10 @@ class PatientsController < AuthController
           :secondary_central_tendon_proximal_distal, 
           :secondary_musculotendinous_proximal_distal,
           :secondary_fluid_collection,
-          :secondary_retraction_distance)
+          :secondary_retraction_distance,
+          :secondary_edema_largest_csa,
+          :secondary_edema_longitude_length,
+          :secondary_hamstring_largest_csa,
+          :secondary_quadricep_largest_csa)
     end
 end

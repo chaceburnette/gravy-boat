@@ -105,6 +105,25 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="form-group col-xs-12 col-lg-4">
+            <%= form.label "Largest CSA of edema", class: 'form-label' %>
+            <%= form.text_field :edema_largest_csa, id: :edema_largest_csa, class: 'form-control', type: "number", step: "0.001" %>
+          </div>
+          <div class="form-group col-xs-12 col-lg-4">
+            <%= form.label "Longitudinal length of edema", class: 'form-label' %>
+            <%= form.text_field :edema_longitude_length, id: :edema_longitude_length, class: 'form-control', type: "number", step: "0.001" %>
+          </div>
+          <div class="form-group col-xs-12 col-lg-4">
+            <%= form.label "Largest CSA of hamstring muscle group", class: 'form-label' %>
+            <%= form.text_field :hamstring_largest_csa, id: :hamstring_largest_csa, class: 'form-control', type: "number", step: "0.001" %>
+          </div>
+          <div class="form-group col-xs-12 col-lg-4">
+            <%= form.label "Largest CSA of quadriceps muscle group", class: 'form-label' %>
+            <%= form.text_field :quadricep_largest_csa, id: :quadricep_largest_csa, class: 'form-control', type: "number", step: "0.001" %>
+          </div>
+        </div>
+
         <hr />
 
         <div class="row">
@@ -156,6 +175,25 @@
           <div class="form-group col-xs-12 col-lg-4">
             <%= form.label "Distance of retraction (cm)", class: 'form-label' %>
             <%= form.text_field :secondary_retraction_distance, id: :secondary_retraction_distance, class: 'form-control', type: "number", step: "0.001" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12 col-lg-4">
+            <%= form.label "Largest CSA of edema", class: 'form-label' %>
+            <%= form.text_field :secondary_edema_largest_csa, id: :secondary_edema_largest_csa, class: 'form-control', type: "number", step: "0.001" %>
+          </div>
+          <div class="form-group col-xs-12 col-lg-4">
+            <%= form.label "Longitudinal length of edema", class: 'form-label' %>
+            <%= form.text_field :secondary_edema_longitude_length, id: :secondary_edema_longitude_length, class: 'form-control', type: "number", step: "0.001" %>
+          </div>
+          <div class="form-group col-xs-12 col-lg-4">
+            <%= form.label "Largest CSA of hamstring muscle group", class: 'form-label' %>
+            <%= form.text_field :secondary_hamstring_largest_csa, id: :secondary_hamstring_largest_csa, class: 'form-control', type: "number", step: "0.001" %>
+          </div>
+          <div class="form-group col-xs-12 col-lg-4">
+            <%= form.label "Largest CSA of quadriceps muscle group", class: 'form-label' %>
+            <%= form.text_field :secondary_quadricep_largest_csa, id: :secondary_quadricep_largest_csa, class: 'form-control', type: "number", step: "0.001" %>
           </div>
         </div>
 
