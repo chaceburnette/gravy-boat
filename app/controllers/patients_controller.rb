@@ -52,6 +52,7 @@ class PatientsController < AuthController
           :injury_date,
           :player_id,
           :player_position,
+          :reinjury,
           :number_of_muscles,
           :muscle,
           :peetrons_grade,
