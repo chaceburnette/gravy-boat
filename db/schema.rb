@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171206070829) do
+ActiveRecord::Schema.define(version: 20171213064657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,21 @@ ActiveRecord::Schema.define(version: 20171206070829) do
     t.string "fluid_collection"
     t.decimal "retraction_distance"
     t.integer "number_of_muscles"
+    t.string "free_tendon_proximal_distal"
+    t.string "central_tendon_proximal_distal"
+    t.string "musculotendinous_proximal_distal"
+    t.string "secondary_muscle"
+    t.integer "secondary_peetrons_grade"
+    t.decimal "secondary_origin_lesion_distance"
+    t.decimal "secondary_muscle_length"
+    t.boolean "secondary_free_tendon_involvement"
+    t.boolean "secondary_central_tendon_disruption"
+    t.boolean "secondary_musculotendinous"
+    t.string "secondary_free_tendon_proximal_distal"
+    t.string "secondary_central_tendon_proximal_distal"
+    t.string "secondary_musculotendinous_proximal_distal"
+    t.string "secondary_fluid_collection"
+    t.decimal "secondary_retraction_distance"
   end
 
   create_table "roles", force: :cascade do |t|

@@ -52,7 +52,7 @@ class PatientsController < AuthController
           :injury_date,
           :player_id,
           :player_position,
-          :reinjury,
+          :number_of_muscles,
           :muscle,
           :peetrons_grade,
           :origin_lesion_distance,
@@ -60,8 +60,22 @@ class PatientsController < AuthController
           :free_tendon_involvement,
           :central_tendon_disruption,
           :musculotendinous,
+          :free_tendon_proximal_distal,
+          :central_tendon_proximal_distal, 
+          :musculotendinous_proximal_distal,
           :fluid_collection,
           :retraction_distance,
-          :number_of_muscles)
+          :secondary_muscle,
+          :secondary_peetrons_grade,
+          :secondary_origin_lesion_distance,
+          :secondary_muscle_length,
+          :secondary_free_tendon_involvement,
+          :secondary_central_tendon_disruption,
+          :secondary_musculotendinous,
+          :secondary_free_tendon_proximal_distal,
+          :secondary_central_tendon_proximal_distal, 
+          :secondary_musculotendinous_proximal_distal,
+          :secondary_fluid_collection,
+          :secondary_retraction_distance)
     end
 end
