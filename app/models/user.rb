@@ -3,6 +3,8 @@ class User < ApplicationRecord
 
   has_many :user_role, :dependent => :destroy
   has_many :roles, through: :user_role
+  has_many :user_patients
+  has_many :patients, through: :user_patients
 
   before_save :normalize
 

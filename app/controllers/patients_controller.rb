@@ -2,7 +2,11 @@ class PatientsController < AuthController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
   def index
-    @patients = Patient.all.order(:id)
+    if current_user.admin? || current_user.image_viewer?
+      @patients = Patient.all.order(:id)
+    else
+      @patients = current_user.patients.all.order(:id)
+    end
   end
 
   def show
@@ -16,7 +20,7 @@ class PatientsController < AuthController
   end
 
   def create
-    @patient = Patient.new(patient_params)
+    @patient = current_user.patients.create(patient_params)
 
     if @patient.save
       redirect_to "/patients/#{@patient.id}/mri_images", notice: 'Patient was successfully created.'
